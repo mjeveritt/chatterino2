@@ -928,7 +928,10 @@ void SplitContainer::refreshTabLiveStatus()
     for (const auto &s : this->splits_)
     {
         auto c = s->getChannel();
-        if (c->isLive())
+        auto ct = c->getType();
+        if ((ct == Channel::Type::TwitchLive) || (ct == Channel::Type::TwitchMentions) ||
+            (ct == Channel::Type::TwitchWatching) || (ct == Channel::Type::TwitchWhispers) ||
+            (c->isLive()) )
         {
             liveStatus = true;
             break;
